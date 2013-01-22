@@ -1,0 +1,59 @@
+Device:
+06A3 0DC5 Saitek PLC
+
+
+A2 00 FF FF FF 00 00 00 00 -> Alles einschalten, full power
+
+A2 00 00 00 00 00 00 00 00 -> Alles auschalten ("reset")
+
+assumption:
+
+A2 00 <rr> <gg <bb> 00 00 -> set color value
+
+------------------------------------
+A4 00 00 01   -> position center
+A4 00 01 00	-> position north
+A4 00 02 00	-> position NE
+A4 00 04 00	-> position E
+A4 00 08 00	-> Position SE
+A4 00 10 00	-> position S
+A4 00 20 00	-> position SW
+A4 00 40 00	-> position W
+A4 00 80 00	-> position NW
+
+A5 00 00	-> height "any"
+A5 00 08	-> height "low"
+A5 00 04	-> height "middle"
+A5 00 02	-> height "high"
+
+---------------------------------------------------
+
+A1 00 00 -> disable
+
+A1 00 01 -> enable
+(follow by "reset")
+
+-----------------------------
+
+A6 00 00
+-
+A6 00 64
+
+-> set intensity (seems to have direct consequences on A2 command output?)
+
+------------------------
+
+
+
+import usb.core
+
+VENDOR=0x06a3
+PRODUCT=0x0dc5
+
+device=usb.core.find(idVendor=VENDOR,idProduct=PRODUCT)
+device.set_configuration()
+
+cmdlist=[0xA2,0x00,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00]
+cmd=str(bytearray(cmdlist))
+
+device.write(1,cmd)
