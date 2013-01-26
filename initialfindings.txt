@@ -1,10 +1,42 @@
 Device:
 06A3 0DC5 Saitek PLC
 
+--------------------
+Initialize:
 
-A2 00 FF FF FF 00 00 00 00 -> Alles einschalten, full power
+select configuration (1)
 
-A2 00 00 00 00 00 00 00 00 -> Alles auschalten ("reset")
+Send: A7 00
+
+read one of:
+B0 00 00 01 00 01 02 49 01 (CENTER)
+B0 00 00 01 01 00 02 49 01 (NORTH)
+B0 00 00 01 80 00 00 64 01 ( NW)
+
+
+B0 00 00 01 00 01 00 64 01 (C, H any , full intensity )
+B0 00 00 01 00 01 08 64 01 (C, H low, full intensity)
+B0 00 00 01 00 01 08 00 01 (C, H low, no intensity) 
+
+B0 00 00 01 pp pp hh ii 01 
+pp: position
+hh: height
+ii: intensity
+
+
+
+
+Send: all off (A2 00 ...)
+
+
+
+---------------------
+
+
+
+A2 00 FF FF FF 00 00 00 00 -> all on, full power
+
+A2 00 00 00 00 00 00 00 00 -> all off ("reset")
 
 assumption:
 
@@ -46,14 +78,55 @@ A6 00 64
 
 
 import usb.core
+from usb.util import CTRL_IN,CTRL_OUT
 
 VENDOR=0x06a3
 PRODUCT=0x0dc5
 
-device=usb.core.find(idVendor=VENDOR,idProduct=PRODUCT)
-device.set_configuration()
+CONFIGURATION=1
+INTERFACENUMBER=0
+ENDPOINTADDRESS=1 # or 0x01
 
-cmdlist=[0xA2,0x00,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00]
-cmd=str(bytearray(cmdlist))
 
-device.write(1,cmd)
+dev=usb.core.find(idVendor=VENDOR,idProduct=PRODUCT)
+dev.set_configuration(CONFIGURATION)
+
+# get an endpoint instance
+cfg = dev.get_active_configuration()
+interface_number = cfg[(0,0)].bInterfaceNumber
+alternate_setting = usb.control.get_interface(dev, interface_number)
+intf = usb.util.find_descriptor(
+    cfg, bInterfaceNumber = interface_number,
+    bAlternateSetting = alternate_setting
+)
+
+ep = usb.util.find_descriptor(
+    intf,
+    # match the first OUT endpoint
+    custom_match = \
+    lambda e: \
+        usb.util.endpoint_direction(e.bEndpointAddress) == \
+        usb.util.ENDPOINT_OUT
+)
+
+assert ep is not None
+
+
+
+bmRequestType = CTRL_IN
+bmRequest   = 0x01
+wValue = 0x03b0
+wIndex=0x00
+wlen=0x09
+
+res=dev.ctrl_transfer(bmRequestType=bmRequestType, bRequest=bmRequest, wValue=wValue, wIndex=wIndex, data_or_wLength=wlen)
+
+
+#cmdlist=[0xA2,0x00,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00]
+#cmdlist=[0xA7,0x00]
+#cmd=str(bytearray(cmdlist))
+
+#device.write(1,cmd)
+
+
+
