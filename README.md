@@ -2,7 +2,7 @@ pycyborg
 ========
 
 Python library for the cyborg ambx gaming lights 
-(http://www.cyborggaming.com/de/prod/ambx.htm)
+(http://www.cyborggaming.com/prod/ambx.htm)
 
 
 Status:
