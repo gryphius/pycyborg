@@ -22,4 +22,4 @@ Run "colortransitiondemo.py" for a quick test of a single cyborg gaming light (d
 Run "identify.py" to activate all cyborg gaming lights and print out some information (position, intensity)
 
 
-A boblight (http://code.google.com/p/boblight/) is available. Sample configuration in doc/boblight.conf, adapt path to boblight.py
+A boblight interface (http://code.google.com/p/boblight/) is available. Sample configuration in doc/boblight.conf, adapt path to boblight.py
