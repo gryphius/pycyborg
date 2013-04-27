@@ -58,13 +58,14 @@ class Cyborg(object):
         self.g=0
         self.b=0
         
-    def initialize(self):
+    def initialize(self,lights_off=True):
         """initialize the device"""
         self.usbdev.set_configuration(CONFIGURATION)
         self._usb_idle_request()
         self._usb_reset_request()
         self._usb_get_report()
-        self.lights_off()
+        if lights_off:
+            self.lights_off()
 
     def _usb_idle_request(self):
         self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x0a, wValue=0x00, wIndex=0, data_or_wLength=None)
@@ -142,14 +143,14 @@ class Cyborg(object):
     def __str__(self):
         return "<Cyborg position=%s v_pos=%s intensity=%s%%>"%(self.position,self.vertical_position,self.intensity) 
 
-def get_all_cyborgs():
+def get_all_cyborgs(lights_off=True):
     """Search usb bus for cyborg gaming ligts and return all initialized Cyborg objects"""
     retlist=[]
     devs=usb.core.find(find_all=True,idVendor=VENDOR,idProduct=PRODUCT)
     for dev in devs:
         c=Cyborg(dev)
         try:
-            c.initialize()
+            c.initialize(lights_off)
             retlist.append(c)
         except:
             import traceback
