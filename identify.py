@@ -1,11 +1,10 @@
 #!/usr/bin/python2
 
 from pycyborg import get_all_cyborgs
-import time
 
 if __name__ == '__main__':
     cyborgs=get_all_cyborgs()
-    print "found and initialized %s cyborg gaming lights"%(len(cyborgs))
+    print "found and initialized %s cyborg ambx gaming lights"%(len(cyborgs))
     print ""
     
     counter=0
@@ -15,7 +14,9 @@ if __name__ == '__main__':
         print cy
         cy.set_intensity(50)
         cy.set_rgb_color(255,255,255)
-        time.sleep(2)
-        cy.lights_off()
+        cy.transition_to(255,0,0,duration=0.3)
+        cy.transition_to(0,255,0,duration=0.3)
+        cy.transition_to(0,0,255,duration=0.3)
+        cy.transition_to(0,0,0,duration=0.3)
         print ""
         

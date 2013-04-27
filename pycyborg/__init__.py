@@ -53,12 +53,18 @@ class Cyborg(object):
         self.vertical_position=None
         self.intensity=None
         
+        #keep color values for transitions
+        self.r=0
+        self.g=0
+        self.b=0
+        
     def initialize(self):
         """initialize the device"""
         self.usbdev.set_configuration(CONFIGURATION)
         self._usb_idle_request()
         self._usb_reset_request()
         self._usb_get_report()
+        self.lights_off()
 
     def _usb_idle_request(self):
         self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x0a, wValue=0x00, wIndex=0, data_or_wLength=None)
@@ -88,6 +94,26 @@ class Cyborg(object):
         assert b>=0 and b<=255
         
         self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a2, wIndex=0, data_or_wLength=[0xa2,0x00,r,g,b,0x00,0x00,0x00,0x00])
+        self.r=r
+        self.g=g
+        self.b=b
+    
+    
+    def transition_to(self,r,g,b,duration=1,updatetime=0.001):
+        """Transition from current color to another. duration and updatetime in secs"""
+        steps=duration/updatetime
+        start_r,start_g,start_b=self.r,self.g,self.b
+        step_r=(r-start_r)/steps
+        step_g=(g-start_g)/steps
+        step_b=(b-start_b)/steps
+        for step in range(int(steps)):
+            time.sleep(updatetime)
+            new_r=start_r+(step*step_r)
+            new_g=start_g+(step*step_g)
+            new_b=start_b+(step*step_b)
+            self.set_rgb_color(new_r,new_g,new_b)
+            
+        self.set_rgb_color(r,g,b)
     
     def lights_off(self):
         self.set_rgb_color(0,0,0)
