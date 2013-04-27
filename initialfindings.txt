@@ -85,7 +85,7 @@ PRODUCT=0x0dc5
 
 CONFIGURATION=1
 INTERFACENUMBER=0
-ENDPOINTADDRESS=1 # or 0x01
+ENDPOINTADDRESS=1
 
 
 dev=usb.core.find(idVendor=VENDOR,idProduct=PRODUCT)
@@ -118,6 +118,8 @@ bmRequest   = 0x01
 wValue = 0x03b0
 wIndex=0x00
 wlen=0x09
+
+res=dev.ctrl_transfer(bmRequestType=CTRL_OUT, bRequest=0x0a, wValue=0, wIndex=0, data_or_wLength=0)
 
 res=dev.ctrl_transfer(bmRequestType=bmRequestType, bRequest=bmRequest, wValue=wValue, wIndex=wIndex, data_or_wLength=wlen)
 
