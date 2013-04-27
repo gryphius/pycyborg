@@ -1,0 +1,88 @@
+Device:
+06A3 0DC5 Saitek PLC
+
+
+Commands(send):
+
+A1: enable / disable the device
+A2: set color
+A3: ?
+A4: set position
+A5: set height
+A6: set intensity
+A7: reset
+
+Answers (receive):
+B0: position, height, intensity
+
+--------------------
+Initialize:
+
+select configuration (1)
+
+Send: A7 00
+
+read one of:
+B0 00 00 01 00 01 02 49 01 (CENTER)
+B0 00 00 01 01 00 02 49 01 (NORTH)
+B0 00 00 01 80 00 00 64 01 ( NW)
+
+
+B0 00 00 01 00 01 00 64 01 (C, H any , full intensity )
+B0 00 00 01 00 01 08 64 01 (C, H low, full intensity)
+B0 00 00 01 00 01 08 00 01 (C, H low, no intensity) 
+
+B0 00 00 01 pp pp hh ii 01 
+pp: position
+hh: height
+ii: intensity
+
+
+Send: all off (A2 00 ...)
+
+
+
+---------------------
+
+
+
+A2 00 FF FF FF 00 00 00 00 -> all on, full power
+
+A2 00 00 00 00 00 00 00 00 -> all off ("reset")
+
+assumption:
+
+A2 00 <rr> <gg <bb> 00 00 00 -> set color value
+
+------------------------------------
+A4 00 00 01   -> position center
+A4 00 01 00	-> position north
+A4 00 02 00	-> position NE
+A4 00 04 00	-> position E
+A4 00 08 00	-> Position SE
+A4 00 10 00	-> position S
+A4 00 20 00	-> position SW
+A4 00 40 00	-> position W
+A4 00 80 00	-> position NW
+
+A5 00 00	-> height "any"
+A5 00 08	-> height "low"
+A5 00 04	-> height "middle"
+A5 00 02	-> height "high"
+
+---------------------------------------------------
+
+A1 00 00 -> disable
+
+A1 00 01 -> enable
+(follow by "reset")
+
+-----------------------------
+
+A6 00 00
+-
+A6 00 64
+
+-> set intensity (seems to have direct consequences on A2 command output?)
+
+------------------------
