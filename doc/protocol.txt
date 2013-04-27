@@ -52,7 +52,7 @@ A2 00 00 00 00 00 00 00 00 -> all off ("reset")
 
 assumption:
 
-A2 00 <rr> <gg <bb> 00 00 00 -> set color value
+A2 00 <rr> <gg> <bb> 00 00 00 -> set color value
 
 ------------------------------------
 A4 00 00 01   -> position center

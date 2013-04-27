@@ -20,7 +20,6 @@ def color(dev,r=0,g=0,b=0):
 def transition(dev,target_r,target_g,target_b,duration=1,updatetime=0.001,start_r=0,start_g=0,start_b=0):
     """Transition from one color to another"""
     color(dev,start_r,start_g,start_b)
-    starttime=time.time()
     steps=duration/updatetime
     
     step_r=(target_r-start_r)/steps

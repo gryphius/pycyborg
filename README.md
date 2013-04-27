@@ -4,10 +4,21 @@ pycyborg
 Python library for the cyborg ambx gaming lights 
 (http://www.cyborggaming.com/de/prod/ambx.htm)
 
-Current status:
+Status:
+ - protocol reverse engineering: Done
+ - simple demo without library: Done
+ - library: Done
+ - boblight interface: In progress
 
- * protocol is reverse engineered
- * sending commands to the device works (see colortransitiondemo.py)
- * full library is work in progress
+Requires : 
+ - pyusb 1.0 ( https://github.com/walac/pyusb/ )
 
 
+Run "colortransitiondemo.py" for a quick test of a single cyborg gaming light (doesn't use the full library - this was the first test script)
+
+Run "identify.py" to activate all cyborg gaming lights and print out some information (position, intensity)
+
+
+
+
+Todo: usage sample
