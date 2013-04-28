@@ -30,8 +30,8 @@ scripts
 getting started
 ---------------
 
-1. install pyusb 1.0 ( use your distros package or directly from  github: https://github.com/walac/pyusb/ )
-2. (optional) create a udev rule to make the gaming lights accessible for non-root users
+* install pyusb 1.0 ( use your distros package or directly from  github: https://github.com/walac/pyusb/ )
+*  (optional) create a udev rule to make the gaming lights accessible for non-root users
 
 put a file '80-cyborg.rules' in /etc/udev/rules.d with the following content:
 
@@ -41,13 +41,13 @@ activate the rule:
  
     sudo udevadm trigger
 
-3. check out pycyborg from github:
+* check out pycyborg from github:
 
 from your home directory:
 
     git clone git://github.com/gryphius/pycyborg.git
-    
-4. test
+
+* test
 
 this should flash your gaming lights and print out some info. 
 if you skipped step 2 you must run this as root, eg. sudo python identify.py or you will get USBError: [Errno 13] Access denied (insufficient permissions)
