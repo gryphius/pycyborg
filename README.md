@@ -33,34 +33,34 @@ getting started
 1. install pyusb 1.0 ( use your distros package or directly from  github: https://github.com/walac/pyusb/ )
 2. (optional) create a udev rule in /etc/udev/rules.d to make the gaming lights accessible for non-root users
 
-	SUBSYSTEMS=="usb", ACTION=="add", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0dc5", MODE="666"
+    SUBSYSTEMS=="usb", ACTION=="add", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0dc5", MODE="666"
     
- activate the rule:
+activate the rule:
  
-	sudo udevadm trigger
+    sudo udevadm trigger
 
 3. check out pycyborg from github:
 
-	git clone git://github.com/gryphius/pycyborg.git
+    git clone git://github.com/gryphius/pycyborg.git
     
 4. test if your lights work. 
 
-	cd pycyborg
-	python identify.py
+    cd pycyborg
+    python identify.py
    
- (if you skipped step 2 you must run this as root, eg. sudo python identify.py or you will get USBError: [Errno 13] Access denied (insufficient permissions))
+(if you skipped step 2 you must run this as root, eg. sudo python identify.py or you will get USBError: [Errno 13] Access denied (insufficient permissions))
  
- you should see your lights flashing and console output similar to this:
+you should see your lights flashing and console output similar to this:
 
-	found and initialized 2 cyborg ambx gaming lights
-	
-	Cyborg 1: 
-	<Cyborg position=NW v_pos=low intensity=50%>
-	
-	Cyborg 2: 
-	<Cyborg position=S v_pos=low intensity=50%>
+    found and initialized 2 cyborg ambx gaming lights
+    	
+    Cyborg 1: 
+    <Cyborg position=NW v_pos=low intensity=50%>
+    
+    Cyborg 2: 
+    <Cyborg position=S v_pos=low intensity=50%>
 
- 
+
 boblight
 --------
 
