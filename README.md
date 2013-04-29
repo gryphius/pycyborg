@@ -20,12 +20,13 @@ Requires :
 scripts
 -------
 
-"colortransitiondemo.py" : a quick test of a single cyborg gaming light (doesn't use the full library - this was the first test script)
-
 "identify.py" : to activate all cyborg gaming lights and print out some information (position, intensity)
 
 "setcolor.py" : control the gaming lights from the shell (from bash scripts etc) 
 
+"boblight.py" : boblight interface
+
+a few demo scripts are available in the demo folder 
 
 getting started
 ---------------

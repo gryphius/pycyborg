@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+"""
+This was the first running python script, before I made the library. 
+If you want to code your own script without having to import the pycyborg lib you may use this as a reference
+"""
+
 import usb.core
 import time
 import random
