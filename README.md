@@ -11,7 +11,7 @@ Status:
  - library: done
  - boblight interface: done
  - installer: todo
- - tested plattforms: Arch Linux , Mac OS X 10.6.8
+ - tested platforms: Arch Linux , Mac OS X 10.6.8
 
 Requires : 
  - libusb ( http://www.libusb.org/ ) and pyusb 1.0 ( https://github.com/walac/pyusb/ )
