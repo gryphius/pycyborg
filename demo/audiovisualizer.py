@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 #script from http://freshfoo.com/blog/pulseaudio_monitoring, adapted to use gaming lights
 

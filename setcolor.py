@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/env python
 
 #setcolor r g b  -> sets for all devices
 #setcolor -n 1  r g b -> sets only for first device
