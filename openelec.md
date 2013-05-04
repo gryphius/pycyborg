@@ -4,18 +4,18 @@ pycyborg installation instructions for openelec
 Openelec's root filesystem is read-only and there are tools like git missing, therefore the installation steps are a little bit different.
 
 you need: a 2nd computer with network access to the openelec box. this box can be running windows or linux. it needs to have ssh and SMB access to the openelec box.
-we'll call that computer "INSTALLBOX" from now on. All commands on openelec should be run as root (ssh root@<your openelec ip> - default password is openelec).
-We'll call this "OPENELEC-SSH". Stuff that needs to be done in xbmc gui will be tagged "OPENELEC-XBMC"
+we'll call that computer **(INSTALLBOX)** from now on. All commands on openelec should be run as root (ssh root@<your openelec ip> - default password is openelec).
+We'll call this **(OPENELEC-SSH)**. Stuff that needs to be done in xbmc gui will be tagged **(OPENELEC-XBMC)**
 
 
-(OPENELEC-XBMC)
+**(OPENELEC-XBMC)**
 
 * enable the ssh service in openelec settings
 * install boblightd and boblight xbmc addon
 * restart openelec box
 
 
-(INSTALLBOX)
+**(INSTALLBOX)**
 
  * download pyusb as zipfile: https://github.com/walac/pyusb/archive/master.zip
  * extract master.zip
@@ -28,7 +28,7 @@ We'll call this "OPENELEC-SSH". Stuff that needs to be done in xbmc gui will be 
  * in Userdata/addon_data/service.multimedia.boblightd, rename boblight.X11.sample to boblight.X11
  * in the same directory, create a new file 'boblight.conf' with the following content:
  
- 
+
 	[global]
 	interface 127.0.0.1
 	port 19333
@@ -69,7 +69,7 @@ We'll call this "OPENELEC-SSH". Stuff that needs to be done in xbmc gui will be 
 	vscan 0 100 
 
 
-(OPENELEC-SSH)
+**(OPENELEC-SSH)**
 
 since we can not install pyusb into a systemfolder where pycyborg can find it, we need to symlink it directly:
 
