@@ -92,16 +92,23 @@ class Cyborg(object):
         self.vertical_position=v2k(v_pos,V_POS)
         self.intensity=data[7]
         self.position=v2k(position,POSITION)
-        
+    
+    
+    def assert_int_255(self,i):
+        """make sure i is an int between 0 and 255"""
+        i=int(i)
+        if i<0:
+            i=0
+        if i>255:
+            i=255
+        return i
+     
     def set_rgb_color(self,r=0,g=0,b=0):
         """Set the light to a specific color"""
-        r=int(r)
-        g=int(g)
-        b=int(b)
-        assert r>=0 and r<=255
-        assert g>=0 and g<=255
-        assert b>=0 and b<=255
-        
+        r=self.assert_int_255(r)
+        g=self.assert_int_255(g)
+        b=self.assert_int_255(b)
+                
         self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a2, wIndex=0, data_or_wLength=[0xa2,0x00,r,g,b,0x00,0x00,0x00,0x00])
         self.r=r
         self.g=g
