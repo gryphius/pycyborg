@@ -1,7 +1,15 @@
-import usb.core
-import time
 import sys
+try:
+    import usb.core
+except:
+    sys.stderr.write("Could not import usb.core - please make sure it is installed into sys.path or symlinked in pycyborg")
+    sys.exit(1)
 
+
+import usb.backend.libusb1 as libusb1    
+import time
+import ctypes
+import os
 
 # --- device info ---
 VENDOR=0x06a3
@@ -143,9 +151,22 @@ class Cyborg(object):
     def __str__(self):
         return "<Cyborg position=%s v_pos=%s intensity=%s%%>"%(self.position,self.vertical_position,self.intensity) 
 
+
+def is_openelec():
+    """Returns True if we are on a openelec system (which means read-only root fs)"""
+    return os.path.exists("/etc/openelec-release")
+
 def get_all_cyborgs(lights_off=True):
     """Search usb bus for cyborg gaming ligts and return all initialized Cyborg objects"""
     retlist=[]
+    
+    #patch the dll loader for openelec systems (or we'll get no backend available error)
+    if is_openelec():
+        def openelec_loader():     
+            return ctypes.CDLL('libusb-1.0.so')
+        
+        libusb1._load_library=openelec_loader
+    
     devs=usb.core.find(find_all=True,idVendor=VENDOR,idProduct=PRODUCT)
     for dev in devs:
         c=Cyborg(dev)
