@@ -26,7 +26,8 @@ We'll call this **(OPENELEC-SSH)**. Stuff that needs to be done in xbmc gui will
  * you should now have two folders "pyusb-master" and "pycyborg-master"
  * copy both folders via smb to the openelec box into "Userdata"
  * in Userdata/addon_data/service.multimedia.boblightd, rename boblight.X11.sample to boblight.X11
- * in the same directory, create a new file 'boblight.conf' with the following content:
+ 
+ in the same directory, create a new file 'boblight.conf' with the following content:
  
 
 
