@@ -7,6 +7,8 @@ you need: a 2nd computer with network access to the openelec box. this box can b
 we'll call that computer **(INSTALLBOX)** from now on. All commands on openelec should be run as root (ssh root@<your openelec ip> - default password is openelec).
 We'll call this **(OPENELEC-SSH)**. Stuff that needs to be done in xbmc gui will be tagged **(OPENELEC-XBMC)**
 
+step-by-step
+------------
 
 **(OPENELEC-XBMC)**
 
@@ -18,11 +20,11 @@ We'll call this **(OPENELEC-SSH)**. Stuff that needs to be done in xbmc gui will
 **(INSTALLBOX)**
 
  * download pyusb as zipfile: https://github.com/walac/pyusb/archive/master.zip
- * extract master.zip
- * delete master.zip
+ * extract `master.zip`
+ * delete `master.zip`
  * download pycyborg as zipfile: https://github.com/gryphius/pycyborg/archive/master.zip
- * extract master.zip
- * delete master.zip
+ * extract `master.zip`
+ * delete `master.zip`
  * you should now have two folders `pyusb-master` and `pycyborg-master`
  * copy both folders via smb to the openelec box into `Userdata`
 
