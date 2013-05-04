@@ -29,6 +29,7 @@ We'll call this **(OPENELEC-SSH)**. Stuff that needs to be done in xbmc gui will
  * in the same directory, create a new file 'boblight.conf' with the following content:
  
 
+
 	[global]
 	interface 127.0.0.1
 	port 19333
@@ -66,7 +67,7 @@ We'll call this **(OPENELEC-SSH)**. Stuff that needs to be done in xbmc gui will
 	color green cyborg_ambx 5
 	color blue cyborg_ambx 6
 	hscan 50 100
-	vscan 0 100 
+	vscan 0 100
 
 
 **(OPENELEC-SSH)**
