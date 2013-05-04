@@ -4,7 +4,7 @@ pycyborg installation instructions for openelec
 Openelec's root filesystem is read-only and there are tools like git missing, therefore the installation steps are a little bit different.
 
 you need: a 2nd computer with network access to the openelec box. this box can be running windows or linux. it needs to have ssh and SMB access to the openelec box.
-we'll call that computer **(INSTALLBOX)** from now on. All commands on openelec should be run as root (ssh root@<your openelec ip> - default password is openelec).
+we'll call that computer **(INSTALLBOX)** from now on. All commands on openelec should be run as root (ssh root@your.openelec.ip - default password is openelec).
 We'll call this **(OPENELEC-SSH)**. Stuff that needs to be done in xbmc gui will be tagged **(OPENELEC-XBMC)**
 
 step-by-step
