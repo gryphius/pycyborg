@@ -1,12 +1,13 @@
 import sys
+USBLIB_AVAILABLE=False
 try:
     import usb.core
+    import usb.backend.libusb1 as libusb1
+    USBLIB_AVAILABLE=True 
 except:
-    sys.stderr.write("Could not import usb.core - please make sure it is installed into sys.path or symlinked in pycyborg")
-    sys.exit(1)
+    sys.stderr.write("Could not import usb.core - please make sure pyusb 1.0 is installed into sys.path or symlinked in pycyborg")
 
 
-import usb.backend.libusb1 as libusb1    
 import time
 import ctypes
 import os
@@ -109,10 +110,11 @@ class Cyborg(object):
         g=self.assert_int_255(g)
         b=self.assert_int_255(b)
                 
-        self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a2, wIndex=0, data_or_wLength=[0xa2,0x00,r,g,b,0x00,0x00,0x00,0x00])
+        ret=self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a2, wIndex=0, data_or_wLength=[0xa2,0x00,r,g,b,0x00,0x00,0x00,0x00])
         self.r=r
         self.g=g
         self.b=b
+        return ret
     
     
     def transition_to(self,r,g,b,duration=1,updatetime=0.001):
@@ -165,8 +167,11 @@ def is_openelec():
 
 def get_all_cyborgs(lights_off=True):
     """Search usb bus for cyborg gaming ligts and return all initialized Cyborg objects"""
-    retlist=[]
     
+    if not USBLIB_AVAILABLE:
+        return []
+    
+    retlist=[]
     #patch the dll loader for openelec systems (or we'll get no backend available error)
     if is_openelec():
         def openelec_loader():     
