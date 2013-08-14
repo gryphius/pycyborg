@@ -10,8 +10,8 @@ Status:
  - simple demo without library: done
  - library: done
  - boblight interface: done
- - installer: todo
- - tested platforms: Arch Linux , Mac OS X 10.6.8
+ - installer: done
+ - tested platforms: Linux(Arch,Ubuntu,OpenElec,Raspbian) , Mac OS X 10.6.8
 
 Requires : 
  - libusb ( http://www.libusb.org/ ) and pyusb 1.0 ( https://github.com/walac/pyusb/ )
@@ -31,29 +31,31 @@ a few demo scripts are available in the demo folder
 getting started
 ---------------
 
-* install pyusb 1.0 ( use your distros package or directly from  github: https://github.com/walac/pyusb/ )
+* install libusb-1.0
+* install pyusb 1.0 ( use your distro's package or directly from  github: https://github.com/walac/pyusb/ )
 *  (optional) create a udev rule to make the gaming lights accessible for non-root users
 
-put a file '80-cyborg.rules' in /etc/udev/rules.d with the following content:
+* either get source as package:
 
-    SUBSYSTEMS=="usb", ACTION=="add", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0dc5", MODE="666"
+    wget http://github.com/gryphius/pycyborg/tarball/master -O pycyborg.tar.gz
+    tar -xvzf pycyborg.tar.gz
+    cd gryphius-pycyborg*
     
-activate the rule:
- 
-    sudo udevadm trigger
-
-* check out pycyborg from github:
-
-from your home directory:
+* or clone from github
 
     git clone git://github.com/gryphius/pycyborg.git
+    cd pycyborg
+
+
+* install the library
+    python setup.py install
+    sudo udevadm trigger
 
 * test
 
 this should flash your gaming lights and print out some info. 
 if you skipped step 2 you must run this as root, eg. sudo python identify.py or you will get USBError: [Errno 13] Access denied (insufficient permissions)
 
-    cd pycyborg
     python identify.py
  
 
