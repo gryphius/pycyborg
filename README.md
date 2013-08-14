@@ -33,15 +33,16 @@ getting started
 
 * install libusb-1.0
 * install pyusb 1.0 ( use your distro's package or directly from  github: https://github.com/walac/pyusb/ )
-*  (optional) create a udev rule to make the gaming lights accessible for non-root users
 
-* either get source as package:
+* get the source
+
+either as package:
 
     wget http://github.com/gryphius/pycyborg/tarball/master -O pycyborg.tar.gz
     tar -xvzf pycyborg.tar.gz
     cd gryphius-pycyborg*
     
-* or clone from github
+or clone git repo
 
     git clone git://github.com/gryphius/pycyborg.git
     cd pycyborg
