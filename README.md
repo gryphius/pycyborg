@@ -48,7 +48,10 @@ or clone git repo
     cd pycyborg
 
 
-* install the library
+* install
+
+install the package and reload udev rules
+
     python setup.py install
     sudo udevadm trigger
 
