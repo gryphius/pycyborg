@@ -120,3 +120,9 @@ To control the cyborg lights from boblight (http://code.google.com/p/boblight/),
 	hscan 50 100
 	vscan 0 100
 
+
+there is also a simple wizard that can automatically generate a config file. this is especially useful if you have more than two lights: 
+
+
+    python boblight.py --makeconfig
+ 
