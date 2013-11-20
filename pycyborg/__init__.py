@@ -104,12 +104,15 @@ class Cyborg(object):
             i=255
         return i
      
-    def set_rgb_color(self,r=0,g=0,b=0):
+    def set_rgb_color(self,r=0,g=0,b=0,force=False):
         """Set the light to a specific color"""
         r=self.assert_int_255(r)
         g=self.assert_int_255(g)
         b=self.assert_int_255(b)
-                
+        #make this a no-op if we already are showing this color
+        if not force and (r==self.r and b==self.b and b==self.b):
+            return None
+        
         ret=self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a2, wIndex=0, data_or_wLength=[0xa2,0x00,r,g,b,0x00,0x00,0x00,0x00])
         self.r=r
         self.g=g
