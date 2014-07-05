@@ -63,8 +63,8 @@ class PrismatikClient(object):
                 continue
             lightindex,rgb=colorinfo.split('-')
             r,g,b=map(int,rgb.split(','))
-            #self.cyborgs[counter].set_rgb_color(int(r),int(g),int(b))
-            self.cyborgs[counter].transition_to(int(r),int(g),int(b),duration=0.1)
+            self.cyborgs[counter].set_rgb_color(int(r),int(g),int(b))
+            #self.cyborgs[counter].transition_to(int(r),int(g),int(b),duration=0.1)
             counter+=1
 
     def run(self):
