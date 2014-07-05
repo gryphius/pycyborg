@@ -196,6 +196,38 @@ def get_all_cyborgs(lights_off=True):
     return retlist
 
 
+def transition_multiple(cyborgs,targetrgbs,duration=1,updatetime=0.001):
+    """transition multiple cyborgs"""
+    if len(cyborgs)>len(targetrgbs):
+        raise Exception("targetrgbs must be a list of rgb tuples with size>=num cyborgs")
+    steps=duration/updatetime
+    
+    startstep=[]
+    
+    for i in range(len(cyborgs)):
+        cyborg=cyborgs[i]    
+        start_r,start_g,start_b=cyborg.r,cyborg.g,cyborg.b
+        step_r=(targetrgbs[i][0]-start_r)/steps
+        step_g=(targetrgbs[i][1]-start_g)/steps
+        step_b=(targetrgbs[i][2]-start_b)/steps
+        startstep.append((start_r,start_g,start_b,step_r,step_g,step_b),)
+    
+    for step in range(int(steps)):
+        time.sleep(updatetime)
+        for i in range(len(cyborgs)):
+            cyborg=cyborgs[i]
+            (start_r,start_g,start_b,step_r,step_g,step_b)=startstep[i]
+            new_r=start_r+(step*step_r)
+            new_g=start_g+(step*step_g)
+            new_b=start_b+(step*step_b)
+            cyborg.set_rgb_color(new_r,new_g,new_b)
+    
+    for i in range(len(cyborgs)):
+        cyborg=cyborgs[i]
+        cyborg.set_rgb_color(targetrgbs[i][0],targetrgbs[i][1],targetrgbs[i][2])
+        
+
+
 if __name__=='__main__':
     cyborgs=get_all_cyborgs()
     print "found %s cyborg gaming lights"%(len(cyborgs))

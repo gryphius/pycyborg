@@ -2,7 +2,7 @@
 import socket
 import time
 import traceback
-from pycyborg import get_all_cyborgs
+from pycyborg import get_all_cyborgs,transition_multiple
 import sys
 
 class PrismatikClient(object):
@@ -53,19 +53,16 @@ class PrismatikClient(object):
         all_colorinfo=colorline[len(keyword):]
         colorinfos=all_colorinfo.split(';')
         
-        counter=0
+        targets=[]
         for colorinfo in colorinfos:
-            if len(self.cyborgs)<=counter:
-                #not enough cyborgs available
-                return
             colorinfo=colorinfo.strip()
             if colorinfo=='':
                 continue
             lightindex,rgb=colorinfo.split('-')
             r,g,b=map(int,rgb.split(','))
-            self.cyborgs[counter].set_rgb_color(int(r),int(g),int(b))
-            #self.cyborgs[counter].transition_to(int(r),int(g),int(b),duration=0.1)
-            counter+=1
+            targets.append((r,g,b),)
+        transition_multiple(self.cyborgs,targets,duration=0.3)
+        
 
     def run(self):
         while True:
