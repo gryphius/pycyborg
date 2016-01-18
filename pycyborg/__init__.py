@@ -110,7 +110,7 @@ class Cyborg(object):
         g=self.assert_int_255(g)
         b=self.assert_int_255(b)
         #make this a no-op if we already are showing this color
-        if not force and (r==self.r and b==self.b and b==self.b):
+        if not force and (r==self.r and g==self.g and b==self.b):
             return None
         
         ret=self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a2, wIndex=0, data_or_wLength=[0xa2,0x00,r,g,b,0x00,0x00,0x00,0x00])
