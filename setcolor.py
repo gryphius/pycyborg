@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #setcolor r g b  -> sets for all devices
-#setcolor -n 1  r g b -> sets only for first device
+#setcolor -n 0  r g b -> sets only for first device
 #setcolor -p center r g b -> sets for all devices in center
 #setcolor  -i 100 r g b -> sets intensity
 
@@ -69,7 +69,7 @@ if __name__=='__main__':
             onlyone=cyborgs[options.num]
             cyborgs=[onlyone,]
         except:
-            print "can not select index %s from cyborgs. I have %s"(options.num,len(cyborgs))
+            print "can not select index %s from cyborgs. I have %s"%(options.num,len(cyborgs))
             sys.exit(1)
     
     
