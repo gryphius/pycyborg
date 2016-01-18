@@ -14,7 +14,8 @@ if __name__=='__main__':
     optionparser.add_option("-n",type="int", dest="num",help="only change n-th device color (start at 0)")
     optionparser.add_option("-p",dest="position",help="only search for devices at the specified position. possible values are: center,n,ne,e,se,s,sw,w,nw")
     optionparser.add_option("-i",type="int", dest="intensity",help="set intensity (0-100)")
-    
+    optionparser.add_option("-v",dest="verbose",action="store_true",default=False, help="be verbose")
+
     (options,pargs) = optionparser.parse_args()
     
     #pargs must be 3 values
@@ -54,6 +55,8 @@ if __name__=='__main__':
     
     
     cyborgs=get_all_cyborgs(lights_off=False)
+    if options.verbose:
+        print "Found %s cyborgs"%len(cyborgs)
     
     #filter by position
     if pos!=None:
@@ -72,9 +75,13 @@ if __name__=='__main__':
             print "can not select index %s from cyborgs. I have %s"%(options.num,len(cyborgs))
             sys.exit(1)
     
+    if options.verbose:
+        print "Setting color to %s,%s,%s on %s cyborg(s)"%(r,g,b,len(cyborgs))
     
     #cyborg candidate list complete, perform the update
     for cy in cyborgs:
+        if options.verbose:
+            print "Changing : %s"%cy
         if options.intensity!=None:
             cy.set_intensity(options.intensity)
         
