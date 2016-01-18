@@ -9,6 +9,13 @@ from optparse import OptionParser
 import sys
 from pycyborg import get_all_cyborgs,POSITION
 
+colormap={
+    'off':(0,0,0),
+    'red':(255,0,0),
+    'green':(0,255,0),
+    'blue':(0,0,255),
+}
+
 if __name__=='__main__':
     optionparser=OptionParser()
     optionparser.add_option("-n",type="int", dest="num",help="only change n-th device color (start at 0)")
@@ -17,21 +24,20 @@ if __name__=='__main__':
     optionparser.add_option("-v",dest="verbose",action="store_true",default=False, help="be verbose")
 
     (options,pargs) = optionparser.parse_args()
-    
-    #pargs must be 3 values
-    if len(pargs)!=3:
+    if len(pargs)==1 and pargs[0].lower() in colormap:
+        r,g,b=colormap[pargs[0].lower()]
+    elif len(pargs)==3:
+        try:
+            r,g,b=int(pargs[0]),int(pargs[1]),int(pargs[2])
+        except:
+            print "r g b must be integers 0-255"
+            optionparser.print_help()
+            sys.exit(1)
+    else:
         print "missing r/g/b values"
         optionparser.print_help()
         sys.exit(1)
-    
-    try:
-        r,g,b=int(pargs[0]),int(pargs[1]),int(pargs[2])
-    except:
-        print "r g b must be integers 0-255"
-        optionparser.print_help()
-        sys.exit(1)
-        
-    
+
     if r<0 or r>255 or g<0 or g>255 or b<0 or b>255:
         print "r g b must be integers 0-255"
         optionparser.print_help()
@@ -77,7 +83,7 @@ if __name__=='__main__':
     
     if options.verbose:
         print "Setting color to %s,%s,%s on %s cyborg(s)"%(r,g,b,len(cyborgs))
-    
+
     #cyborg candidate list complete, perform the update
     for cy in cyborgs:
         if options.verbose:
