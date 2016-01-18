@@ -90,15 +90,5 @@ if __name__=='__main__':
             print "Changing : %s"%cy
         if options.intensity!=None:
             cy.set_intensity(options.intensity)
-        
-        cy.set_rgb_color(r,g,b)
-            
-    
-    
-    
-    
-            
-        
-    
-    
-    
+        cy.set_rgb_color(r,g,b,force=True)
+
