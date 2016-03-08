@@ -166,7 +166,12 @@ class Cyborg(object):
 
 def is_openelec():
     """Returns True if we are on a openelec system (which means read-only root fs)"""
-    return os.path.exists("/etc/openelec-release")
+    if os.path.exists("/etc/openelec-release"):
+        return True
+    osrelfile="/etc/os-release"
+    if os.path.exists(osrelfile) and "openelec" in open(osrelfile,'r').read().lower():
+        return True
+    return False
 
 def get_all_cyborgs(lights_off=True):
     """Search usb bus for cyborg gaming ligts and return all initialized Cyborg objects"""
@@ -177,7 +182,7 @@ def get_all_cyborgs(lights_off=True):
     retlist=[]
     #patch the dll loader for openelec systems (or we'll get no backend available error)
     if is_openelec():
-        def openelec_loader():     
+        def openelec_loader(find_library=None):
             return ctypes.CDLL('libusb-1.0.so')
         
         libusb1._load_library=openelec_loader
