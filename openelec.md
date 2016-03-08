@@ -26,9 +26,9 @@ step-by-step
  * extract `master.zip`
  * delete `master.zip`
  * you should now have two folders `pyusb-master` and `pycyborg-master`
- * copy both folders via smb to the openelec box into `Userdata`
+ * copy both folders via smb to the openelec box into `userdata`
 
-still over smb, open the folder `Userdata/addon_data/service.multimedia.boblightd`
+still over smb, open the folder `userdata/addon_data/service.multimedia.boblightd`
 and create a new file `boblight.conf` with the following content:
 
 
@@ -38,7 +38,7 @@ and create a new file `boblight.conf` with the following content:
 	
 	[device]
 	name cyborg_ambx
-	output "/storage/.xbmc/userdata/pycyborg-master/boblight.py"
+	output "/storage/.kodi/userdata/pycyborg-master/boblight.py"
 	channels 6
 	type popen
 	interval 500000
@@ -77,12 +77,12 @@ and create a new file `boblight.conf` with the following content:
 
 since we can not install pyusb into a systemfolder where pycyborg can find it, we need to symlink it directly:
 
-	cd ~/.xbmc/userdata/pycyborg-master/
+	cd ~/.kodi/userdata/pycyborg-master/
 	ln -s ../pyusb-master/usb
 	
 now it's time to test if the gaming lights are working:
 
-	cd ~/.xbmc/userdata/pycyborg-master/
+	cd ~/.kodi/userdata/pycyborg-master/
 	./identify.py
 	
 if you see the lights flashing, another reboot should do the trick and enable boblight
