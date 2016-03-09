@@ -1,39 +1,31 @@
-pycyborg
-========
+#pycyborg
 
-Python library for the cyborg ambx gaming lights 
-(http://www.cyborggaming.com/prod/ambx.htm)
+Python library for the cadcatz cyborg ambx gaming lights 
+(http://www.ambx.com/product/cyborg-gaming-lights)
 
-
-Status:
+##Status
  - protocol reverse engineering: done
  - simple demo without library: done
  - library: done
  - boblight interface: done
  - installer: done
- - tested platforms: Linux(Arch,Ubuntu,OpenElec,Raspbian) , Mac OS X 10.6.8
+ - tested platforms: Linux(Arch,Ubuntu,OpenElec,Raspbian) , Mac OS X
 
 Requires : 
- - libusb ( http://www.libusb.org/ ) and pyusb 1.0 ( https://github.com/walac/pyusb/ )
+ - libusb 1.0 ( http://www.libusb.org/ ) and pyusb  ( https://github.com/walac/pyusb/ )
 
+##scripts
 
-scripts
--------
+* ```identify.py``` : activate all cyborg gaming lights and print out some information
+* ```setcolor.py``` : control the gaming lights from the shell (from bash scripts etc) 
+* ```boblight.py``` : boblight interface
+* ```lightpack-prismatik.py``` : [lightpack](http://lightpack.tv/index.php) client
+* a few demo scripts are available in the ```demo``` folder 
 
-"identify.py" : to activate all cyborg gaming lights and print out some information (position, intensity)
-
-"setcolor.py" : control the gaming lights from the shell (from bash scripts etc) 
-
-"boblight.py" : boblight interface
-
-a few demo scripts are available in the demo folder 
-
-getting started
----------------
+##getting started
 
 * install libusb-1.0
 * install pyusb 1.0 ( use your distro's package or directly from  github: https://github.com/walac/pyusb/ )
-
 * get the source
 
 either as package:
@@ -58,7 +50,7 @@ install the package and reload udev rules
 * test
 
 this should flash your gaming lights and print out some info. 
-if you skipped step 2 you must run this as root, eg. sudo python identify.py or you will get USBError: [Errno 13] Access denied (insufficient permissions)
+if you skipped step 2 you must run this as root, eg. sudo python identify.py or you will get ```USBError: [Errno 13] Access denied``` (insufficient permissions)
 
     python identify.py
  
@@ -74,8 +66,7 @@ console output should be similar to this:
     <Cyborg position=S v_pos=low intensity=50%>
 
 
-boblight
---------
+##boblight
 
 To control the cyborg lights from boblight (http://code.google.com/p/boblight/), use a config file like below
 (change the path in 'output' to where you checked out pycyborg)
