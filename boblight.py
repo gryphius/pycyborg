@@ -8,6 +8,15 @@ import sys
 import os
 from pycyborg import get_all_cyborgs
 
+try:
+	raw_input
+except NameError:
+  pass
+else:
+  def input(msg=''):
+  	return(raw_input(msg))
+
+	
 cyborgs=get_all_cyborgs()
 
 positions={
@@ -54,15 +63,15 @@ def bobloop():
 def ask_position(current_position=None):
     while True:
         if current_position!=None:
-            new_pos=raw_input("New position [%s]: "%current_position)
+            new_pos=input("New position [%s]: "%current_position)
         else:
-            new_pos=raw_input("Position (one of: %s: "%",".join(positions.keys()))
+            new_pos=input("Position (one of: %s: "%",".join(list(positions.keys())))
         new_pos=new_pos.upper()
         if new_pos=='' and current_position!=None:
             return current_position
-        if new_pos in positions.keys():
+        if new_pos in list(positions.keys()):
             return new_pos
-        print "please enter one of: %s"%",".join(positions.keys())
+        print("please enter one of: %s"%",".join(list(positions.keys())))
     
     
 
@@ -77,7 +86,7 @@ def config_wizard():
     num=None
     
     while True:
-        inp=raw_input(message)
+        inp=input(message)
         if inp.strip()=='':
             num=num_cyborgs
             use_detected_cyborgs=True
@@ -88,10 +97,10 @@ def config_wizard():
             num=n
             break
         except:
-            print "uhm...apparently I wasn't clear enough...please enter a number or press enter"
+            print("uhm...apparently I wasn't clear enough...please enter a number or press enter")
     
     if num==0:
-        print "Ok, no cyborgs it is.. that config was fairly easy to create. cya."
+        print("Ok, no cyborgs it is.. that config was fairly easy to create. cya.")
         sys.exit(0)
     
     #create empty config
@@ -107,11 +116,11 @@ def config_wizard():
         
     #go over unknown cyborgs
     for i in range(num):
-        print "Checking: Cyborg No. %s"%(i+1)
+        print("Checking: Cyborg No. %s"%(i+1))
         if config[i]!=None:
-            print "Current position is: %s"%config[i]
+            print("Current position is: %s"%config[i])
             continue
-        print "No position found so far."
+        print("No position found so far.")
         if use_detected_cyborgs:
             cyborgs[i].set_rgb_color(255,255,255)
         config[i]=ask_position()
@@ -122,16 +131,16 @@ def config_wizard():
     #menu
     inp=None
     while inp!='done':
-        print "Ok, here's the current setup:"
-        print ""
+        print("Ok, here's the current setup:")
+        print("")
         
         
         for i in range(num):
-            print "[%s] : %s"%(i+1,config[i])
+            print("[%s] : %s"%(i+1,config[i]))
             
-        print ""
-        print "enter number to change position, or 'done' to create the config"
-        inp=raw_input().lower()
+        print("")
+        print("enter number to change position, or 'done' to create the config")
+        inp=input().lower()
         
         try:
             ind=int(inp)-1
@@ -188,7 +197,7 @@ rgb 0000FF
         output +="color green cyborg_ambx %s\n"%channel_counter
         channel_counter+=1
         output +="color blue cyborg_ambx %s\n"%channel_counter
-        for k,v in positions[config[i]].iteritems():
+        for k,v in positions[config[i]].items():
             output+="%s %s\n"%(k,v)
     
     if use_detected_cyborgs:  
@@ -199,16 +208,16 @@ rgb 0000FF
 if __name__=='__main__':
     if '--makeconfig' in sys.argv:
         content=config_wizard()
-        file_name=raw_input("Enter a filename where I should store the newly generated config or press enter to display only:\n")
+        file_name=input("Enter a filename where I should store the newly generated config or press enter to display only:\n")
         file_name=file_name.strip()
         if file_name!='':
             fh=open(file_name,'w')
             fh.write(content)
             fh.close()
-            print "%s written successfully."%(file_name)
+            print("%s written successfully."%(file_name))
             sys.exit(0)
         else:
-            print content
+            print(content)
             sys.exit(0)
         
     try:

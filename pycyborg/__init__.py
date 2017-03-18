@@ -50,7 +50,7 @@ V_POS={
 
 
 def v2k(val,dic):
-    for k,v in dic.iteritems():
+    for k,v in dic.items():
         if v==val:
             return k
 
@@ -235,15 +235,15 @@ def transition_multiple(cyborgs,targetrgbs,duration=1,updatetime=0.001):
 
 if __name__=='__main__':
     cyborgs=get_all_cyborgs()
-    print "found %s cyborg gaming lights"%(len(cyborgs))
+    print("found %s cyborg gaming lights"%(len(cyborgs)))
     
     for cy in cyborgs:
-        print "Cyborg:"
-        print cy
+        print("Cyborg:")
+        print(cy)
         cy.set_rgb_color(255,0,0)
         time.sleep(2)
         cy.lights_off()
     
-    print "done"
+    print("done")
         
     

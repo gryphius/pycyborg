@@ -4,9 +4,12 @@
 
 import sys
 sys.path.insert(0,'../')
-from Queue import Queue
 from ctypes import POINTER, c_ubyte, c_void_p, c_ulong, cast
 from pycyborg import get_all_cyborgs
+try:
+  from queue import Queue
+except:	
+	from Queue import Queue
 
 # From https://github.com/Valodim/python-pulseaudio
 from pulseaudio.lib_pulseaudio import *
@@ -50,34 +53,34 @@ class PeakMonitor(object):
         state = pa_context_get_state(context)
 
         if state == PA_CONTEXT_READY:
-            print "Pulseaudio connection ready..."
+            print("Pulseaudio connection ready...")
             # Connected to Pulseaudio. Now request that sink_info_cb
             # be called with information about the available sinks.
             o = pa_context_get_sink_info_list(context, self._sink_info_cb, None)
             pa_operation_unref(o)
 
         elif state == PA_CONTEXT_FAILED :
-            print "Connection failed"
+            print("Connection failed")
 
         elif state == PA_CONTEXT_TERMINATED:
-            print "Connection terminated"
+            print("Connection terminated")
 
     def sink_info_cb(self, context, sink_info_p, _, __):
         if not sink_info_p:
             return
 
         sink_info = sink_info_p.contents
-        print '-'* 60
-        print 'index:', sink_info.index
-        print 'name:', sink_info.name
-        print 'description:', sink_info.description
+        print('-'* 60)
+        print('index:', sink_info.index)
+        print('name:', sink_info.name)
+        print('description:', sink_info.description)
 
         if sink_info.name == self.sink_name:
             # Found the sink we want to monitor for peak levels.
             # Tell PA to call stream_read_cb with peak samples.
-            print
-            print 'setting up peak recording using', sink_info.monitor_source_name
-            print
+            print()
+            print('setting up peak recording using', sink_info.monitor_source_name)
+            print()
             samplespec = pa_sample_spec()
             samplespec.channels = 1
             samplespec.format = PA_SAMPLE_U8
@@ -96,7 +99,7 @@ class PeakMonitor(object):
         data = c_void_p()
         pa_stream_peek(stream, data, c_ulong(length))
         data = cast(data, POINTER(c_ubyte))
-        for i in xrange(length):
+        for i in range(length):
             # When PA_SAMPLE_U8 is used, samples values range from 128
             # to 255 because the underlying audio data is signed but
             # it doesn't make sense to return signed peaks.
@@ -107,7 +110,7 @@ def main():
     
     cyborgs=get_all_cyborgs()
     if len(cyborgs)==0:
-        print "no cyborgs found :("
+        print("no cyborgs found :(")
         sys.exit(1)
     
     monitor = PeakMonitor(SINK_NAME, METER_RATE)

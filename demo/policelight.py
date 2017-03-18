@@ -10,7 +10,7 @@ from pycyborg import get_all_cyborgs
 cyborgs=get_all_cyborgs()
 numcyborgs=len(cyborgs)
 if numcyborgs==0:
-    print "no cyborg gaming lights found :("
+    print("no cyborg gaming lights found :(")
     sys.exit(1)
 
 green=0
