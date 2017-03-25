@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logging.info('Started')
 from pycyborg import get_all_cyborgs
 
 if __name__ == '__main__':
     cyborgs=get_all_cyborgs()
     print("found and initialized %s cyborg ambx gaming lights"%(len(cyborgs)))
-    print("")
-    
+    if len(cyborgs)!=0:
+        logging.info('Using %s',cyborgs[0].usbdev.backend.__module__)
+            
     counter=0
     for cy in cyborgs:
         counter+=1
