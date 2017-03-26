@@ -9,7 +9,7 @@ from pycyborg import get_all_cyborgs
 try:
   from queue import Queue
 except:	
-	from Queue import Queue
+  from Queue import Queue
 
 # From https://github.com/Valodim/python-pulseaudio
 from pulseaudio.lib_pulseaudio import *

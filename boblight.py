@@ -9,12 +9,12 @@ import os
 from pycyborg import get_all_cyborgs
 
 try:
-	raw_input
+  raw_input
 except NameError:
   pass
 else:
   def input(msg=''):
-  	return(raw_input(msg))
+    return(raw_input(msg))
 
 	
 cyborgs=get_all_cyborgs()
