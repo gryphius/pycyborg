@@ -34,3 +34,6 @@ nosetests.xml
 .project
 .pydevproject
 .idea/
+
+# 2to3.py backups
+*.bak
