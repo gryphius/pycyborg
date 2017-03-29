@@ -26,7 +26,7 @@ def _approach_rgb(r, g, b, r_target, g_target, b_target):
 cyborgs=get_all_cyborgs()
 numcyborgs=len(cyborgs)
 if numcyborgs==0:
-    print "no cyborg gaming lights found :("
+    print("no cyborg gaming lights found :(")
     sys.exit(1)
 
 red, green, blue = _random_rgb()

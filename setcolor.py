@@ -30,22 +30,22 @@ if __name__=='__main__':
         try:
             r,g,b=int(pargs[0]),int(pargs[1]),int(pargs[2])
         except:
-            print "r g b must be integers 0-255"
+            print("r g b must be integers 0-255")
             optionparser.print_help()
             sys.exit(1)
     else:
-        print "missing r/g/b values"
+        print("missing r/g/b values")
         optionparser.print_help()
         sys.exit(1)
 
     if r<0 or r>255 or g<0 or g>255 or b<0 or b>255:
-        print "r g b must be integers 0-255"
+        print("r g b must be integers 0-255")
         optionparser.print_help()
         sys.exit(1)
     
     if options.intensity!=None:
         if options.intensity<0 or options.intensity>100:
-            print "intensity must be 0-100"
+            print("intensity must be 0-100")
             optionparser.print_help()
             sys.exit(1)
     
@@ -53,7 +53,7 @@ if __name__=='__main__':
     if options.position!=None:
         pos=options.position.upper()
         if pos not in POSITION:
-            print "position must be one of: center,n,ne,e,se,s,sw,w,nw"
+            print("position must be one of: center,n,ne,e,se,s,sw,w,nw")
             optionparser.print_help()
             sys.exit(1)
         
@@ -62,7 +62,7 @@ if __name__=='__main__':
     
     cyborgs=get_all_cyborgs(lights_off=False)
     if options.verbose:
-        print "Found %s cyborgs"%len(cyborgs)
+        print("Found %s cyborgs"%len(cyborgs))
     
     #filter by position
     if pos!=None:
@@ -78,16 +78,16 @@ if __name__=='__main__':
             onlyone=cyborgs[options.num]
             cyborgs=[onlyone,]
         except:
-            print "can not select index %s from cyborgs. I have %s"%(options.num,len(cyborgs))
+            print("can not select index %s from cyborgs. I have %s"%(options.num,len(cyborgs)))
             sys.exit(1)
     
     if options.verbose:
-        print "Setting color to %s,%s,%s on %s cyborg(s)"%(r,g,b,len(cyborgs))
+        print("Setting color to %s,%s,%s on %s cyborg(s)"%(r,g,b,len(cyborgs)))
 
     #cyborg candidate list complete, perform the update
     for cy in cyborgs:
         if options.verbose:
-            print "Changing : %s"%cy
+            print("Changing : %s"%cy)
         if options.intensity!=None:
             cy.set_intensity(options.intensity)
         cy.set_rgb_color(r,g,b,force=True)

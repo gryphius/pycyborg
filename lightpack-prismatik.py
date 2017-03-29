@@ -24,15 +24,15 @@ class PrismatikClient(object):
             try:
                 s=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
                 s.connect((self.host,self.port),)
-            except Exception,e:
+            except Exception as e:
                 s=None
-                print "Connection failed, retrying in %s seconds. Reason: %s"%(reconnect_interval,str(e))
+                print("Connection failed, retrying in %s seconds. Reason: %s"%(reconnect_interval,str(e)))
                 time.sleep(reconnect_interval)
         
         self.clientsocket=s
         self.socketfile=self.clientsocket.makefile('r')
         banner=self.socketfile.readline()
-        print "Connected/%s"%banner
+        print("Connected/%s"%banner)
         if self.apikey:
             self.authenticate()
     
@@ -59,7 +59,7 @@ class PrismatikClient(object):
             if colorinfo=='':
                 continue
             lightindex,rgb=colorinfo.split('-')
-            r,g,b=map(int,rgb.split(','))
+            r,g,b=list(map(int,rgb.split(',')))
             targets.append((r,g,b),)
         transition_multiple(self.cyborgs,targets,duration=0.3)
         
@@ -75,14 +75,14 @@ class PrismatikClient(object):
                 for c in self.cyborgs:
                     c.lights_off()
                 return
-            except Exception,e:
-                print traceback.format_exc()
-                print "Connection broken. reconnecting. (%s)"%(str(e))
+            except Exception as e:
+                print(traceback.format_exc())
+                print("Connection broken. reconnecting. (%s)"%(str(e)))
                 self._reconnect()
             
 if __name__=='__main__':
     if len(sys.argv)<2:
-        print "args: <apikey> [<host>]"
+        print("args: <apikey> [<host>]")
     apikey=sys.argv[1]
     if len(sys.argv)<3:
         host='localhost'

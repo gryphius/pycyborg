@@ -51,13 +51,13 @@ def random_color():
     return r,g,b
 
 #find the first ambx madcatz gaming light
-print "Searching for a madcatz ambx gaming light..."
+print("Searching for a madcatz ambx gaming light...")
 dev=usb.core.find(idVendor=VENDOR,idProduct=PRODUCT)
 
 if dev!=None:
-    print "Found!"
+    print("Found!")
 else:
-    print "Not found :( "
+    print("Not found :( ")
     sys.exit(1)
 
 dev.set_configuration(CONFIGURATION)
@@ -77,11 +77,11 @@ start=time.time()
 oldr,oldg,oldb=0,0,0
 while time.time()-start<20:
     r,g,b=random_color()
-    print "Transitioning to %s,%s,%s"%(r,g,b)
+    print("Transitioning to %s,%s,%s"%(r,g,b))
     transition(dev,r,g,b,1,0.001,oldr,oldg,oldb)
     oldr,oldg,oldb=r,g,b
 
 #turn off
 transition(dev,0,0,0,1,0.001,oldr,oldg,oldb)
-print "good bye"
+print("good bye")
 
