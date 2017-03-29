@@ -79,7 +79,7 @@ right=[L4,L5,L6]
 all=[L1,L2,L3,L4,L5,L6]
 
 # ---------------------------------------- START
-print "Intro..."
+print("Intro...")
 #piano intro
 show.set_color(1000,all,white,200)
 start=1200
@@ -136,7 +136,7 @@ show.set_color(17291,[L5,L6],veronica,300)
 show.set_color(17995,all,scarlet,200)
 
 
-print "chorus 1..."
+print("chorus 1...")
 #00:19 strophe1
 for i in range(120000):
     pos=19000+i
@@ -158,7 +158,7 @@ show.set_color(34599,L6,red,100) #00:34
 
 show.set_color(34700,all,black,2100) #00:34 
 
-print "chorus 2..."
+print("chorus 2...")
 ## 00:38 strophe2 ##
 
 
@@ -172,7 +172,7 @@ show.set_color(54032,[L2,L3],tractor_red,800) #00:54
 show.set_color(54380,[L3,L4],yellow,600) #00:54 
 show.set_color(54594,[L4,L5],vivid_violet,400) #00:54 
 
-print "bridge..."
+print("bridge...")
 #00:55 bridge
 
 show.set_color(59138,all,white,200) #00:59 
@@ -199,7 +199,7 @@ show.set_color(69310,[L2,L3,L4,L5],aureolin,1000) #01:09
 show.set_color(70706,all,magenta,200) #01:10 
 show.set_color(71702,all,mango_tango,200) #01:11 
 
-print "refrain..."
+print("refrain...")
 #01:12 refrain (whats his name...)
 show.set_color(72727,all,red,1000) #01:12 
 
@@ -214,7 +214,7 @@ show.set_color(81475,[L3,L4],yellow,1000) #01:21
 show.set_color(81567,all,yellow,1000) #01:21   
 
 
-print "pitch shift..."
+print("pitch shift...")
 #01:31 tonartwechsel
 
 #sax
@@ -267,7 +267,7 @@ show.set_color(135520,[L1,L3,L5],red,1000) #02:15
 show.set_color(135520,[L2,L4,L6],white,1000) #02:15
 
 #---------------- GO ! -------------------------------
-print "pygame startup..."
+print("pygame startup...")
 
 offset=0
 end=None
