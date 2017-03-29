@@ -16,7 +16,7 @@ class PGdisplay(object) :
         # http://www.karoltomala.com/blog/?p=679
         disp_no = os.getenv("DISPLAY")
         if disp_no:
-            print "I'm running under X display = {0}".format(disp_no)
+            print("I'm running under X display = {0}".format(disp_no))
 
         # Check which frame buffer drivers are available
         # Start with fbcon since directfb hangs with composite output
@@ -95,7 +95,7 @@ class PGdisplay(object) :
             try:
                 pygame.draw.circle(background,tpl,(hpos,vpos),radius,border)
             except TypeError:
-                print "got onvalid color: %s"%(str(tpl))
+                print("got onvalid color: %s"%(str(tpl)))
                 
             #border
             pygame.draw.circle(background,(0,0,0),(hpos,vpos),radius,2)
@@ -171,7 +171,7 @@ class LightShow(object):
             new_g=int(start_g+(step*step_g))
             new_b=int(start_b+(step*step_b))
             if new_r<0 or new_g<0 or new_b<0:
-                print new_r,new_g,new_b
+                print(new_r,new_g,new_b)
             for light in lights:
                 self.states[light][ts+step]=LightState(new_r,new_g,new_b)
 
@@ -247,12 +247,12 @@ class LightShow(object):
             cyborg.lights_off()
         
         if trb!=None:
-            print trb
+            print(trb)
         
         if len(savedpositions)>0:
-            print "Saved positions: %s"%savedpositions
+            print("Saved positions: %s"%savedpositions)
             for s in savedpositions:
-                print """show.set_color(%s,lightlist,color,duration) #%s """%(s,self._ms_to_minsec(s))
+                print("""show.set_color(%s,lightlist,color,duration) #%s """%(s,self._ms_to_minsec(s)))
     
 if __name__=='__main__':
     pass
