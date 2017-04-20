@@ -95,8 +95,8 @@ class Cyborg(object):
         self.intensity=data[7]
         self.position=v2k(position,POSITION)
     
-    
-    def assert_int_255(self,i):
+    @staticmethod
+    def assert_int_255(i):
         """make sure i is an int between 0 and 255"""
         i=int(i)
         if i<0:
