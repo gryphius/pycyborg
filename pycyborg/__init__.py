@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import sys
 USBLIB_AVAILABLE=False
 try:
@@ -11,6 +14,7 @@ except:
 import time
 import ctypes
 import os
+
 
 # --- device info ---
 VENDOR=0x06a3
@@ -96,6 +100,7 @@ class Cyborg(object):
         self.vertical_position=v2k(v_pos,V_POS)
         self.intensity=data[7]
         self.position=v2k(position,POSITION)
+        return(data)
     
     @staticmethod
     def assert_int_255(i):
@@ -108,7 +113,7 @@ class Cyborg(object):
         return i
      
     def set_rgb_color(self,r=0,g=0,b=0,force=False):
-        """Set the light to a specific color"""
+        """Set the light to a specific color immediately"""
         r=self.assert_int_255(r)
         g=self.assert_int_255(g)
         b=self.assert_int_255(b)
@@ -121,7 +126,29 @@ class Cyborg(object):
         self.g=g
         self.b=b
         return ret
-    
+
+    def rgb_transition(self,r=0,g=0,b=0,duration=1,force=False):
+        """Transition from current color to another. Duration in secs.        
+        Timing handled by Cyborg hardware.  Function returns immediately."""
+        r=self.assert_int_255(r)
+        g=self.assert_int_255(g)
+        b=self.assert_int_255(b)
+        #make this a no-op if we already are showing this color
+        if not force and (r==self.r and g==self.g and b==self.b):
+            return None
+        
+        tms = int(duration*1000)
+        assert tms>=0 and tms<=0xffffffff
+        t=tms.to_bytes(4,'little')
+
+        logger.info(
+            'Transitioning device at %03d:%03d to RGB:%02x%02x%02x over %d ms',
+            self.usbdev.bus,self.usbdev.address,r,g,b,tms)
+        ret=self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a2, wIndex=0, data_or_wLength=[0xa2,0x00,r,g,b,t[0],t[1],t[2],t[3]])
+        self.r=r
+        self.g=g
+        self.b=b
+        return ret
     
     def transition_to(self,r,g,b,duration=1,updatetime=0.001):
         """Transition from current color to another. duration and updatetime in secs"""
