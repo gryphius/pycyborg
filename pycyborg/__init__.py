@@ -86,7 +86,10 @@ class Cyborg(object):
         """read the cyborg device status like position and intensity"""
         arraydata=self.usbdev.ctrl_transfer(bmRequestType=0xa1, bRequest=0x01, wValue=0x03b0, wIndex=0, data_or_wLength=9)
         data=arraydata.tolist()
-        assert data[0:4]==[0xb0,0x00,0x00,0x01], 'unexpected device status info start: %s'%(data[0:4])
+        assert (data[0:4]==[0xb0,0x00,0x00,0x01]) or \
+               (data[0:4]==[0xb0,0xaa,0x00,0x01]) or \
+               (data[0:4]==[0xb0,0xaa,0x00,0x00]),   \
+          'unexpected device status info start: %s'%(data[0:4])
         assert data[8]==1,'unexpected last byte value: %s'%data[8]
         position=data[4:6]
         v_pos=data[6]
@@ -94,8 +97,8 @@ class Cyborg(object):
         self.intensity=data[7]
         self.position=v2k(position,POSITION)
     
-    
-    def assert_int_255(self,i):
+    @staticmethod
+    def assert_int_255(i):
         """make sure i is an int between 0 and 255"""
         i=int(i)
         if i<0:
@@ -158,7 +161,7 @@ class Cyborg(object):
         assert verticalposition in V_POS
         posbyte=V_POS[verticalposition]
         self.usbdev.ctrl_transfer(bmRequestType=0x21, bRequest=0x09, wValue=0x03a5, wIndex=0, data_or_wLength=[0xa5,0x00,posbyte])
-        self.position=verticalposition
+        self.verticalposition=verticalposition
 
     def __str__(self):
         return "<Cyborg position=%s v_pos=%s intensity=%s%%>"%(self.position,self.vertical_position,self.intensity) 
