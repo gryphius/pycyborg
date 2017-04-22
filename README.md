@@ -9,10 +9,11 @@ Python library for the cadcatz cyborg ambx gaming lights
  - library: done
  - boblight interface: done
  - installer: done
- - tested platforms: Linux(Arch,Ubuntu,OpenElec,Raspbian) , Mac OS X
+ - tested platforms: Linux(Arch,Ubuntu,OpenElec,Raspbian) , Mac OS X, Win10
 
 Requires : 
- - libusb 1.0 ( http://www.libusb.org/ ) and pyusb  ( https://github.com/walac/pyusb/ )
+ - libusb 1.0 ( http://www.libusb.org/ ) or libusb-win32 (http://zadig.akeo.ie/)
+ - pyusb  ( https://github.com/walac/pyusb/ )
 
 ##scripts
 
@@ -24,7 +25,7 @@ Requires :
 
 ##getting started
 
-* install libusb-1.0
+* install libusb-1.0 (or libusb-win32 via zadig)
 * install pyusb 1.0 ( use your distro's package or directly from  github: https://github.com/walac/pyusb/ )
 * get the source
 
