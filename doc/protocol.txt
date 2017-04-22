@@ -52,7 +52,21 @@ A2 00 00 00 00 00 00 00 00 -> all off ("reset")
 
 assumption:
 
-A2 00 <rr> <gg> <bb> 00 00 00 -> set color value
+A2 00 <rr> <gg> <bb> 00 00 00 00 -> set color immediately
+
+transition time derived empirically:
+
+A2 00 <rr> <gg> <bb> <t0> <t1> <t2> <t3>
+
+t0 is the LSB of a 4-byte transition time from the 
+current color to the target color where each count
+is 1ms.  The 'distance' that the transition will cover
+has no impact on the timing.  Some examples:
+
+A2 00 FF FF FF 64 00 00 00 -> 100.0ms to reach all on
+A2 00 FF 00 00 00 04 00 00 -> 1.024s  to reach full 'red'
+A2 00 00 7F 00 60 EA 00 00 -> 1.0 min to reach half 'green'
+A2 00 00 00 3F 00 00 01 00 -> 65.536s to reach qtr  'blue'
 
 ------------------------------------
 A4 00 00 01   -> position center
