@@ -1,6 +1,6 @@
 # pycyborg
 
-Python library for the cadcatz cyborg ambx gaming lights 
+Python library for the mad catz cyborg ambx gaming lights 
 (http://www.ambx.com/product/cyborg-gaming-lights)
 
 ## Status
