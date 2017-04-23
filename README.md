@@ -1,9 +1,9 @@
-#pycyborg
+# pycyborg
 
 Python library for the cadcatz cyborg ambx gaming lights 
 (http://www.ambx.com/product/cyborg-gaming-lights)
 
-##Status
+## Status
  - protocol reverse engineering: done
  - simple demo without library: done
  - library: done
@@ -15,7 +15,7 @@ Requires :
  - libusb 1.0 ( http://www.libusb.org/ ) or libusb-win32 (http://zadig.akeo.ie/)
  - pyusb  ( https://github.com/walac/pyusb/ )
 
-##scripts
+## scripts
 
 * ```identify.py``` : activate all cyborg gaming lights and print out some information
 * ```setcolor.py``` : control the gaming lights from the shell (from bash scripts etc) 
@@ -23,7 +23,7 @@ Requires :
 * ```lightpack-prismatik.py``` : [lightpack](http://lightpack.tv/index.php) client
 * a few demo scripts are available in the ```demo``` folder 
 
-##getting started
+## getting started
 
 * install libusb-1.0 (or libusb-win32 via zadig)
 * install pyusb 1.0 ( use your distro's package or directly from  github: https://github.com/walac/pyusb/ )
@@ -67,7 +67,7 @@ console output should be similar to this:
     <Cyborg position=S v_pos=low intensity=50%>
 
 
-##boblight
+## boblight
 
 To control the cyborg lights from boblight (http://code.google.com/p/boblight/), use a config file like below
 (change the path in 'output' to where you checked out pycyborg)
